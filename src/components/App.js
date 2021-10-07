@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ImageGallery from "./imageGallery/ImageGallery";
 import Searchbar from "./searchbar/Searchbar";
 import { getApiData } from "../utils/Api";
-import Button from "./button/Button";
 
 class App extends Component {
   state = {
@@ -45,12 +44,12 @@ class App extends Component {
       <>
         <Searchbar onSubmit={this.onSubmit} />
         <ImageGallery imgList={this.state.imgList} />
-        {this.state.imgList.length > 0 && (
-          <Button onLoadMore={this.onLoadMore} />
-        )}
+        
       </>
     );
   }
 }
 
 export default App;
+
+
