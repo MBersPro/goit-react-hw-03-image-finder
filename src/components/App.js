@@ -12,11 +12,9 @@ class App extends Component {
 
   onSubmit = (q) => {
     if (this.state.name !== q) {
-        this.setState({ imgList: [] });
-        this.setState({ name: q });
-      }
-      
-    
+      this.setState({ imgList: [] });
+      this.setState({ name: q });
+    }
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -44,12 +42,9 @@ class App extends Component {
       <>
         <Searchbar onSubmit={this.onSubmit} />
         <ImageGallery imgList={this.state.imgList} />
-        
       </>
     );
   }
 }
 
 export default App;
-
-
