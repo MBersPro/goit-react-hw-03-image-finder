@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ImageGallery from "./imageGallery/ImageGallery";
 import Searchbar from "./searchbar/Searchbar";
 import { getApiData } from "../utils/Api";
-import { searchbar } from "./searchbar/Searchbar.module.css";
 import Button from "./button/Button";
 
 class App extends Component {
@@ -13,29 +12,42 @@ class App extends Component {
   };
 
   onSubmit = (q) => {
-    this.setState({ name: q });
-    console.log(this.state.name);
-
-    getApiData(this.state.name, this.state.page).then((images) =>
-      this.setState((prev) => ({ imgList: [...prev.imgList, ...images] }))
-    );
+    if (this.state.name !== q) {
+        this.setState({ imgList: [] });
+        this.setState({ name: q });
+      }
+      
+    
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.name !== prevState.name && this.state.name !== "") {
+      getApiData(this.state.name, this.state.page).then((images) =>
+        this.setState((prev) => ({ imgList: [...prev.imgList, ...images] }))
+      );
+    }
+
+    if (this.state.page !== prevState.page) {
+      getApiData(this.state.name, this.state.page).then((images) =>
+        this.setState((prev) => ({ imgList: [...prev.imgList, ...images] }))
+      );
+    }
+  }
 
   onLoadMore = () => {
     this.setState((prev) => ({
       page: prev.page + 1,
     }));
-    getApiData(this.state.name, this.state.page).then((images) =>
-      this.setState((prev) => ({ imgList: [...prev.imgList, ...images] }))
-    );
   };
 
   render() {
     return (
       <>
-        <Searchbar className={searchbar} onSubmit={this.onSubmit} />
+        <Searchbar onSubmit={this.onSubmit} />
         <ImageGallery imgList={this.state.imgList} />
-        {this.state.imgList.length > 0 && <Button />}
+        {this.state.imgList.length > 0 && (
+          <Button onLoadMore={this.onLoadMore} />
+        )}
       </>
     );
   }

@@ -1,10 +1,11 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import {button} from './Button.module.css'
 
 class Button extends Component {
     state = {}
     render() {
         return (
-            <button>
+            <button className={button} onClick={this.props.onLoadMore}>
                 Load More
             </button>
         );

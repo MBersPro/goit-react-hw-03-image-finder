@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import {searchForm, searchForm_button} from './Searchbar.module.css'
+import {
+    searchbar,
+  searchForm,
+  searchForm_button,
+  searchForm_button_label,
+  searchForm_input,
+} from "./Searchbar.module.css";
 
 class Searchbar extends Component {
     state = {
@@ -19,20 +25,20 @@ class Searchbar extends Component {
 
     render() {
         return (
-            <header>
-                <form onSubmit={this.onHandleSubmit} className={searchForm}>
-                    <button type="submit" className={searchForm_button}>
-                        <span>Search</span>
-                    </button>
+          <header className={searchbar}>
+            <form onSubmit={this.onHandleSubmit} className={searchForm}>
+              <button type="submit" className={searchForm_button}>
+                <span className={searchForm_button_label}></span>
+              </button>
 
-                    <input
-                        type="text"
-                        onChange={this.onInputChange}
-                        value={this.state.name}
-                    />
-                </form>
-            </header>
-            
+              <input
+                type="text"
+                onChange={this.onInputChange}
+                value={this.state.name}
+                className={searchForm_input}
+              />
+            </form>
+          </header>
         );
     }
 }

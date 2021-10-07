@@ -1,17 +1,20 @@
 import React, { Component } from "react";
+import { imageGalleryItem, imageGalleryItem_image} from "./ImageGalleryItem.module.css";
 
 class ImageGalleryItem extends Component {
-  state = {
+    state = {
+      isModalOpen: false
   };
 
   render() {
     return (
-        <li>
-            <img
-                src={this.props.img.webformatURL}
-                alt="some"
-            />
-        </li>
+      <li className={imageGalleryItem}>
+        <img
+          className={imageGalleryItem_image}
+          src={this.props.img.webformatURL}
+          alt="some"
+        />
+      </li>
     );
   }
 }
