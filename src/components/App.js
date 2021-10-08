@@ -31,8 +31,7 @@ class App extends Component {
 
   onSubmit = (q) => {
     if (this.state.name !== q) {
-      this.setState({ imgList: [] });
-      this.setState({ name: q });
+      this.setState({ imgList: [], name: q });
     }
   };
 
@@ -52,11 +51,11 @@ class App extends Component {
       this.setState({ loader: true });
       getApiData(this.state.name, this.state.page)
         .then((images) =>
-          this.setState((prev) => ({ imgList: [...prev.imgList, ...images] }))
-      )
-        .then(() => {
-          this.setState({ loader: false });
-        })
+          this.setState((prev) => ({
+            imgList: [...prev.imgList, ...images],
+            loader: false,
+          }))
+        )
         .finally(() => {
           window.scrollTo({
             top: document.documentElement.scrollHeight,
