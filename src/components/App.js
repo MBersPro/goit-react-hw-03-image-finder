@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import ImageGallery from "./imageGallery/ImageGallery";
 import Searchbar from "./searchbar/Searchbar";
 import { getApiData } from "../utils/Api";
+import Button from "./button/Button";
 
 class App extends Component {
   state = {
     name: "",
     imgList: [],
     page: 1,
+    loader: false,
   };
 
   onSubmit = (q) => {
@@ -27,8 +29,12 @@ class App extends Component {
     if (this.state.page !== prevState.page) {
       getApiData(this.state.name, this.state.page).then((images) =>
         this.setState((prev) => ({ imgList: [...prev.imgList, ...images] }))
-      );
+      ).then(() => {window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      })})
     }
+
   }
 
   onLoadMore = () => {
@@ -41,7 +47,10 @@ class App extends Component {
     return (
       <>
         <Searchbar onSubmit={this.onSubmit} />
-        <ImageGallery imgList={this.state.imgList} />
+        <ImageGallery imgList={this.state.imgList}/>
+          {this.state.imgList.length > 0 && 
+          <Button onLoadMore={this.onLoadMore} />
+        }
       </>
     );
   }

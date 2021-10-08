@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ImageGalleryItem from "./imageGalleryItem/ImageGalleryItem";
 import { imageGallery } from "./ImageGallery.module.css";
-import Button from "../button/Button";
 
 class ImageGallery extends Component {
   state = {};
@@ -14,9 +13,7 @@ class ImageGallery extends Component {
             <ImageGalleryItem img={item} />
           ))}
         </ul>
-        {this.props.imgList.length > 0 && (
-          <Button onLoadMore={this.onLoadMore} />
-        )}
+        
       </>
     );
   }
