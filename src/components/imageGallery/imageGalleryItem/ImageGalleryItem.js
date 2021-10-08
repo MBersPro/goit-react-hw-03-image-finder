@@ -6,6 +6,10 @@ class ImageGalleryItem extends Component {
       isModalOpen: false
   };
 
+  onModalChanger = () => {
+    this.props.onModalOpen(this.props.img.largeImageURL);
+  }
+
   render() {
     return (
       <li className={imageGalleryItem}>
@@ -13,6 +17,7 @@ class ImageGalleryItem extends Component {
           className={imageGalleryItem_image}
           src={this.props.img.webformatURL}
           alt="some"
+          onClick={this.onModalChanger}
         />
       </li>
     );

@@ -10,10 +10,9 @@ class ImageGallery extends Component {
       <>
         <ul className={imageGallery}>
           {this.props.imgList.map((item) => (
-            <ImageGalleryItem img={item} />
+            <ImageGalleryItem img={item} onModalOpen={this.props.onModalOpen}/>
           ))}
         </ul>
-        
       </>
     );
   }
